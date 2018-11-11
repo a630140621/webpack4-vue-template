@@ -112,7 +112,7 @@ module.exports = {
     //   inject: true
     // })
     new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, `../dist/inside/index.html`),
+      // filename: path.resolve(__dirname, `../dist/inside/index.html`),
       template: path.resolve(__dirname, `../src/inside/index.html`),
       // chunks: ['vendor', 'outside-vendor', 'outside'],
       inject: true
