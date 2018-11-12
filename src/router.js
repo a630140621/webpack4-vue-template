@@ -1,13 +1,13 @@
 import Vue from "vue"
 import Router from "vue-router"
-import App from "inside/App.vue"
+import App from "src/App.vue"
 
 Vue.use(Router)
 
 
 export default new Router({
     mode: 'history',
-    base: 'inside',
+    base: '',
     routes: [{
         path: '/',
         name: 'home',

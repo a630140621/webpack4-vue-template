@@ -3,7 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/inside/main.js'),
+  entry: path.resolve(__dirname, '../src/main.js'),
   output: {
     filename: 'js/[name].js'
   },
@@ -42,18 +42,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, '..', 'src'),
-      inside: path.resolve(__dirname, '..', 'src', 'inside'),
-      outside: path.resolve(__dirname, '..', 'src', 'outside'),
+      src: path.resolve(__dirname, '..', 'src')
     }
-  },
-  // entry: {
-  //   inside: path.resolve(__dirname, './src/inside/main.js'),
-  //   outside: path.resolve(__dirname, './src/outside/main.js')
-  // },
-  // output: {
-  //   path: path.resolve(__dirname, 'dist'),
-  //   publicPath: '/static/',
-  //   filename: '[name].js'
-  // }
+  }
 }
