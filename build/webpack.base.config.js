@@ -6,11 +6,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/inside/main.js'),
-  // entry: {
-  //   inside: path.resolve(__dirname, '../src/inside/main.js'),
-  //   outside: path.resolve(__dirname, '../src/outside/main.js')
-  // },
+  entry: {
+    inside: path.resolve(__dirname, '../src/inside/main.js'),
+    outside: path.resolve(__dirname, '../src/outside/main.js')
+  },
   output: {
     filename: 'js/[name].js'
   },
@@ -44,28 +43,28 @@ module.exports = {
       }
     ]
   },
-  // optimization: {
-  //   splitChunks: {
-  //     name: true,
-  //     cacheGroups: {
-  //       'inside-vendor': {
-  //         test: /[\\/]inside[\\/]/,
-  //         name: 'inside-vendor',
-  //         chunks: 'all'
-  //       },
-  //       'outside-vendor': {
-  //         test: /[\\/]outside[\\/]/,
-  //         name: 'outside-vendor',
-  //         chunks: 'all'
-  //       },
-  //       'vendor': {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: 'vendor',
-  //         chunks: 'all'
-  //       }
-  //     }
-  //   }
-  // },
+  optimization: {
+    splitChunks: {
+      name: true,
+      cacheGroups: {
+        'inside-vendor': {
+          test: /[\\/]inside[\\/]/,
+          name: 'inside-vendor',
+          chunks: 'all'
+        },
+        'outside-vendor': {
+          test: /[\\/]outside[\\/]/,
+          name: 'outside-vendor',
+          chunks: 'all'
+        },
+        'vendor': {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
     new VueLoaderPlugin(),
     // inside， outside 各自拥有的模块
@@ -99,22 +98,16 @@ module.exports = {
     //   filename: "css/[name].css?[contenthash:8]"
     // }),
     // 生成入口首页
-    // new HtmlWebpackPlugin({
-    //   filename: path.resolve(__dirname, `../dist/inside/index.html`),
-    //   template: path.resolve(__dirname, `../src/inside/index.html`),
-    //   chunks: ['vendor', 'inside-vendor', 'inside'],
-    //   inject: true
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: path.resolve(__dirname, `../dist/outside/index.html`),
-    //   template: path.resolve(__dirname, `../src/outside/index.html`),
-    //   chunks: ['vendor', 'outside-vendor', 'outside'],
-    //   inject: true
-    // })
     new HtmlWebpackPlugin({
-      // filename: path.resolve(__dirname, `../dist/inside/index.html`),
+      filename: path.resolve(__dirname, `../dist/inside/index.html`),
       template: path.resolve(__dirname, `../src/inside/index.html`),
-      // chunks: ['vendor', 'outside-vendor', 'outside'],
+      chunks: ['vendor', 'inside-vendor', 'inside'],
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, `../dist/outside/index.html`),
+      template: path.resolve(__dirname, `../src/outside/index.html`),
+      chunks: ['vendor', 'outside-vendor', 'outside'],
       inject: true
     })
   ],
