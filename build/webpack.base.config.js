@@ -3,6 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // const CommonsChunkPlugin = require('webpack').optimize.CommonsChunkPlugin
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 
 module.exports = {
@@ -67,6 +68,12 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    // 静态目录, 此部分内容被直接拷贝, 不会经过webpack处理
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../static'),
+      to: 'static',
+      ignore: ['.*']
+    }]),
     // inside， outside 各自拥有的模块
     // new CommonsChunkPlugin({
     //   name: 'inside-vendor',
